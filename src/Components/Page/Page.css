@@ -1,0 +1,26 @@
+.header {
+    font-family: vazir;
+}
+
+.alert
+{
+    margin : 0 !important;
+    font-family: vazir;
+
+}
+
+.alert p {
+    margin : 0;
+}
+
+
+.add-todo-btn:hover{
+    background-color: #1b1b11;
+    color: white;
+    transition: all .2s;
+}
+
+.fade.alert.alert-info.show:hover{
+    cursor: pointer;
+    background-color: #afd3f1
+}
