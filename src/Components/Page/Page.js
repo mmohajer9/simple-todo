@@ -67,7 +67,7 @@ function ListItem(props) {
   {
     return (
 
-      <div className = "compListItem" onClick = {props.AddToTodo}>
+      <div className = "compListItem" onClick = {props.CompToTodo}>
         <Alert variant = "success">
         <Alert.Heading>{props.item.title}</Alert.Heading>
         <p style={{fontSize : ".5em"}}>{props.item.date}</p>
@@ -89,36 +89,36 @@ class Display extends Component
       isTodo : true,
       isComp : false,
       todo : [
-        {
-          title : 'کار اول',
-          date : (new Date()).toLocaleDateString().concat(` - ${new Date().toLocaleTimeString()}`),
-        },
-        {
-          title : 'کار دوم',
-          date : (new Date()).toLocaleDateString().concat(` - ${new Date().toLocaleTimeString()}`),
-        },
-        {
-          title : 'کار سوم',
-          date : (new Date()).toLocaleDateString().concat(` - ${new Date().toLocaleTimeString()}`),
-        },
+        // {
+        //   title : 'کار اول',
+        //   date : (new Date()).toLocaleDateString().concat(` - ${new Date().toLocaleTimeString()}`),
+        // },
+        // {
+        //   title : 'کار دوم',
+        //   date : (new Date()).toLocaleDateString().concat(` - ${new Date().toLocaleTimeString()}`),
+        // },
+        // {
+        //   title : 'کار سوم',
+        //   date : (new Date()).toLocaleDateString().concat(` - ${new Date().toLocaleTimeString()}`),
+        // },
       ],
       comp : [
-        {
-          title : 'کار چهارم',
-          date : (new Date()).toLocaleDateString().concat(` - ${new Date().toLocaleTimeString()}`),
-        },
-        {
-          title : 'کار پنجم',
-          date : (new Date()).toLocaleDateString().concat(` - ${new Date().toLocaleTimeString()}`),
-        },
-        {
-          title : 'کار ششم',
-          date : (new Date()).toLocaleDateString().concat(` - ${new Date().toLocaleTimeString()}`),
-        },
-        {
-          title : 'کار هفتم',
-          date : (new Date()).toLocaleDateString().concat(` - ${new Date().toLocaleTimeString()}`),
-        },
+        // {
+        //   title : 'کار چهارم',
+        //   date : (new Date()).toLocaleDateString().concat(` - ${new Date().toLocaleTimeString()}`),
+        // },
+        // {
+        //   title : 'کار پنجم',
+        //   date : (new Date()).toLocaleDateString().concat(` - ${new Date().toLocaleTimeString()}`),
+        // },
+        // {
+        //   title : 'کار ششم',
+        //   date : (new Date()).toLocaleDateString().concat(` - ${new Date().toLocaleTimeString()}`),
+        // },
+        // {
+        //   title : 'کار هفتم',
+        //   date : (new Date()).toLocaleDateString().concat(` - ${new Date().toLocaleTimeString()}`),
+        // },
       ]
     });
   }
@@ -128,6 +128,24 @@ class Display extends Component
   }
   ChangeToTodo = () => {
     this.setState({isTodo : true , isComp : false});
+  }
+
+  CompToTodo = (index) => {
+    this.setState((prev , props) => {
+      let todo_item = {
+        title : prev.comp[index].title,
+        date : prev.comp[index].date
+      }
+      let new_todo = [...prev.todo , todo_item];
+      let temp_comp = prev.comp.map(item => item)
+      temp_comp.splice(index , 1);
+
+      console.log({new_todo , temp_comp});
+      return {
+        todo : new_todo,
+        comp : temp_comp
+      }
+    })    
   }
 
   AddToTodo = (text) => {
@@ -151,7 +169,6 @@ class Display extends Component
       let new_comp = [...prev.comp , comp_item];
       let temp_todo = prev.todo.map(item => item)
       temp_todo.splice(index , 1);
-      console.log(this.state.todo);
       return {
         todo : temp_todo,
         comp : new_comp
@@ -167,7 +184,7 @@ class Display extends Component
         {
           this.state.isTodo 
           ? this.state.todo.map((item , index) => <ListItem AddToComp = {this.AddToComp.bind(this , index)} key = {index} type = "todo" item = {item}/>) 
-          : this.state.comp.map((item , index) => <ListItem key = {index} type = "comp" item = {item}/>)   
+          : this.state.comp.map((item , index) => <ListItem CompToTodo = {this.CompToTodo.bind(this , index)} key = {index} type = "comp" item = {item}/>)   
         }
       </div>
     )

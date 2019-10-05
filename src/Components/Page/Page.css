@@ -21,6 +21,20 @@
 }
 
 .fade.alert.alert-info.show:hover{
+    transition: all .2s;
     cursor: pointer;
-    background-color: #afd3f1
+    background-color: #0289f8;
+    color: white;
+}
+
+.fade.alert.alert-success.show:hover{
+    transition: all .2s;
+    cursor: pointer;
+    background-color: #ee2456;
+    color: white;
+}
+
+
+.todoListItem:end {
+    transition: all 1s;
 }
